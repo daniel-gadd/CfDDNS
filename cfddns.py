@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import requests
 import os
 import logging
+import urllib
 
 ''' Make a request to the CloudFlare API '''
 def api_request(action, **kwargs):
@@ -47,12 +48,11 @@ def api_request(action, **kwargs):
 
 ''' Get the machine's external IP '''
 def external_ip():
-	r = requests.get('http://api.externalip.net/ip')
-	
-	if r.status_code != 200:
-		raise Exception(r.text)
-	else:
-		return r.text
+	try:
+		r = urllib.urlopen("http://my-ip.heroku.com/").read()
+		return r.strip()
+	except:
+		raise Exception("Error getting IP")
 
 def main():
 	# Get the configurations from the config file
