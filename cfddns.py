@@ -49,7 +49,7 @@ def api_request(action, **kwargs):
 ''' Get the machine's external IP '''
 def external_ip():
 	try:
-		r = urllib.urlopen("http://my-ip.heroku.com/").read()
+		r = urllib.urlopen("http://ipv4.icanhazip.com/").read()
 		return r.strip()
 	except:
 		raise Exception("Error getting IP")
